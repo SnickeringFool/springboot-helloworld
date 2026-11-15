@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        maven 'M3'   // must match the name in Manage Jenkins > Tools
+        maven 'M3'
     }
 
     stages {
@@ -22,7 +22,7 @@ pipeline {
             }
         }
 
-        stage('Push JAR to Nexus') {   // NEW
+        stage('Push JAR to Nexus') {
             steps {
                 dir('complete') {
                     withCredentials([usernamePassword(credentialsId: 'nexus-creds',
@@ -41,16 +41,4 @@ pipeline {
         }
     }
 }
-pipeline {
-    agent any
-    tools { maven 'M3' }
-    stages {
-        stage('Build') { 
-		steps { 
-			dir('complete') {
-				sh 'mvn clean package -DskipTests' 
-				}
-	 		}
-    		}
-	}
-}
+
